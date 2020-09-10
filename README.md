@@ -8,7 +8,7 @@
 django2.1.7
 
 #### 安装教程
-
+ 
 pip install django==2.1.7
 
 #### 使用说明
