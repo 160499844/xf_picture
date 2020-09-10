@@ -28,7 +28,7 @@ class FolderItem(models.Model):
 class PicItem(models.Model):
     """图片"""
 
-    main = models.ForeignKey(FolderItem, verbose_name='目录', related_name='FolderItemFK', on_delete=models.SET_NULL,
+    main = models.ForeignKey(FolderItem, verbose_name='目录', related_name='FolderItemFK', on_delete=models.CASCADE,
                              null=True, blank=True)
     file_name = models.CharField('文件名', max_length=100)
     type = models.CharField('格式', max_length=100,null=True)
