@@ -8,57 +8,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <style>
+        .coverImg{
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
 
+<div class="layui-container">
+    <div class="layui-row">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+            <legend>全部</legend>
+        </fieldset>
 
-<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-    <legend>信息流 - 手工加载</legend>
-</fieldset>
+        <ul class="flow-default" style="height: 300px;" id="LAY_demo2"></ul>
+    </div>
 
-<ul class="flow-default" style="height: 300px;" id="LAY_demo2"></ul>
+    <script src="/static/layui/layui.js" charset="utf-8"></script>
+    <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+    <script>
+        layui.use('flow', function(){
+            var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
 
-
-<script src="/static/layui/layui.js" charset="utf-8"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-<script>
-    layui.use('flow', function(){
-        var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
-
-        var flow = layui.flow;
+            var flow = layui.flow;
 
 
-        flow.load({
-            elem: '#LAY_demo2' //流加载容器
-            ,isLazyimg: true
-            ,done: function(page, next) { //加载下一页
-                //模拟插入
-                /*setTimeout(function(){
-              var lis = [];
-              for(var i = 0; i < 6; i++){
-                lis.push('<li><img lay-src="http://127.0.0.1:8000/group/?imgCode=43&v='+ ( (page-1)*6 + i + 1 ) +'"></li>')
-              }
-              next(lis.join(''), page < 6); //假设总页数为 6
-            }, 500);*/
-                var lis = [];
-                //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
-                $.get('/api/getPage?id=2&page=' + page, function (res) {
-                    //假设你的列表返回在data集合中
-                    layui.each(res.content, function (index, item) {
-                        //console.log("item",item);
-                        lis.push('<li><img width="200" lay-src="http://127.0.0.1:8000/group/?imgCode=' + item.imgCode + '"></li>');
-                    });
-                    console.log("当前页数:",page);
-                    //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
-                    //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
-                    next(lis.join(''), page < res.count);
-                })
-            }
+            flow.load({
+                elem: '#LAY_demo2' //流加载容器
+                ,isLazyimg: true
+                ,done: function(page, next) { //加载下一页
+                    //模拟插入
+                    /*setTimeout(function(){
+                  var lis = [];
+                  for(var i = 0; i < 6; i++){
+                    lis.push('<li><img lay-src="http://127.0.0.1:8000/group/?imgCode=43&v='+ ( (page-1)*6 + i + 1 ) +'"></li>')
+                  }
+                  next(lis.join(''), page < 6); //假设总页数为 6
+                }, 500);*/
+                    var lis = [];
+                    //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
+                    $.get('/api/getPage?id=2&page=' + page, function (res) {
+                        //假设你的列表返回在data集合中
+                        layui.each(res.content, function (index, item) {
+                            //console.log("item",item);
+                            lis.push('<div class="layui-col-xs4">' +
+                                '<img width="95%" class="coverImg" lay-src="http://127.0.0.1:8000/group/?imgCode=' + item.imgCode + '">' +
+                                '</div>');
+                        });
+                        console.log("当前页数:",page);
+                        //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
+                        //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
+                        next(lis.join(''), page < res.count);
+                    })
+                }
+            });
+
+
         });
-
-
-    });
-</script>
-
+    </script>
+</div>
 </body>
 </html>
