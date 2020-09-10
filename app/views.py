@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from app.utils import *
 # Create your views here.
 def getImages(request):
+    """流加载图片"""
     #http://127.0.0.1:8000/group/?imgCode=0c93885c4a1d416cac4386b6c5b85dae
     imgCode = request.GET['imgCode']
     #imagepath = "D:/broadband_img/pic/20200805/" + imgCode + '.jpg'
@@ -16,6 +17,7 @@ def getImages(request):
     return HttpResponse(image_data,content_type=pic.res_header) #注意旧版的资料使用mimetype,现在已经改为content_type
 
 def getPage(request):
+    """获取文件夹中图片列表"""
     id = request.GET['id']
     page = request.GET['page']
     item = FolderItem.objects.get(id=id)
@@ -35,6 +37,7 @@ def getPage(request):
     return HttpResponse(json.dumps(page), content_type="application/json")
 
 def update(request):
+    """更新文件夹"""
     id = request.GET['id']
     item = FolderItem.objects.get(id=id)
     path  = os.walk(item.resource)
@@ -57,4 +60,12 @@ def update(request):
     return response
 
 
+def getMyFolderItem(request):
+    """获取全部文件夹"""
+    allItems = FolderItem.objects.filter(status='E')
 
+    return render(request, 'index.html', {"list":allItems})
+
+def details(request):
+    id = request.GET['id']
+    return render(request, 'details.html', {"id":id})

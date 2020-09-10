@@ -30,6 +30,7 @@
     <script src="/static/layui/layui.js" charset="utf-8"></script>
     <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
     <script>
+        var id = {{ id }};
         layui.use('flow', function(){
             var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
 
@@ -50,12 +51,12 @@
                 }, 500);*/
                     var lis = [];
                     //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
-                    $.get('/api/getPage?id=2&page=' + page, function (res) {
+                    $.get('/api/getPage?id='+id+'&page=' + page, function (res) {
                         //假设你的列表返回在data集合中
                         layui.each(res.content, function (index, item) {
                             //console.log("item",item);
                             lis.push('<div class="layui-col-xs4">' +
-                                '<img width="95%" class="coverImg" lay-src="http://127.0.0.1:8000/group/?imgCode=' + item.imgCode + '">' +
+                                '<img width="95%"  class="coverImg" lay-src="/group/?imgCode=' + item.imgCode + '">' +
                                 '</div>');
                         });
                         console.log("当前页数:",page);
