@@ -19,4 +19,6 @@ from app.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('group/', getImages),
+    path('update/', update),
+    path('api/getPage/', getPage),
 ]
