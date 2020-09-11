@@ -48,7 +48,7 @@ def getPage(request):
     page = request.GET['page']
     item = FolderItem.objects.get(id=id)
     images = PicItem.objects.filter(main=item)
-    p = Paginator(images,20)
+    p = Paginator(images,24)
     rList = []
     page1 = p.page(page)
     for item in page1.object_list:
