@@ -11,27 +11,27 @@ from django.contrib.auth.decorators import login_required
 from django.template.context_processors import csrf
 
 def to_login_view(request):
+    """登录页面"""
     return render(request, 'login.html', {})
 
 def login_view(request):
-  username = request.POST['username']
-  password = request.POST['password']
-  user = authenticate(username=username, password=password)
-  if user is not None:
-    login(request, user)
-    """获取全部文件夹"""
-    allItems = FolderItem.objects.filter(status='E')
-
-    return render(request, 'index.html', {"list": allItems})
-  else:
-    return HttpResponse(json.dumps({"msg":"认证失败"}), content_type="application/json")
+    """登录"""
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return HttpResponseRedirect('/home')
+    else:
+        return HttpResponseRedirect('/')
 
 
 def logout_system(request):
+    """退出登录"""
     logout(request)
     return HttpResponseRedirect('/')
 
-@login_required(login_url='/login/')
+@login_required(login_url='/')
 def getImages(request):
     """流加载图片"""
     #http://127.0.0.1:8000/group/?imgCode=0c93885c4a1d416cac4386b6c5b85dae
@@ -40,7 +40,8 @@ def getImages(request):
     pic = PicItem.objects.get(id=imgCode)
     image_data = open(pic.resource,"rb").read()
     return HttpResponse(image_data,content_type=pic.res_header) #注意旧版的资料使用mimetype,现在已经改为content_type
-@login_required(login_url='/login/')
+
+@login_required(login_url='/')
 def getPage(request):
     """获取文件夹中图片列表"""
     id = request.GET['id']
@@ -92,5 +93,6 @@ def getMyFolderItem(request):
     return render(request, 'index.html', {"list":allItems})
 @login_required(login_url='/')
 def details(request):
+    """获取文件夹中的文件"""
     id = request.GET['id']
     return render(request, 'details.html', {"id":id})
