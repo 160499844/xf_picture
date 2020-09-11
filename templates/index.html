@@ -17,8 +17,8 @@
 </head>
 <body>
 <ul class="layui-nav">
-        <!--<li class="layui-nav-item"><a href="">最新活动</a></li>
-        <li class="layui-nav-item layui-this">
+        <li class="layui-nav-item"><a href="/home">首页</a></li>
+       <!--<li class="layui-nav-item layui-this">
             <a href="javascript:;">产品</a>
             <dl class="layui-nav-child">
                 <dd><a href="">选项1</a></dd>
@@ -50,7 +50,7 @@
     </fieldset>
     <div class="layui-row">
         {% for item in list %}
-            <div class="layui-col-xs3">
+            <div class="layui-col-xs2">
                 <a href="/details?id={{ item.id }}">
                     <div class="grid-demo">
                         <table>
@@ -66,6 +66,7 @@
                         </table>
                     </div>
                 </a>
+
             </div>
         {% endfor %}
     </div>
