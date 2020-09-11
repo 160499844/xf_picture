@@ -21,6 +21,9 @@ urlpatterns = [
     path('group/', getImages),
     path('update/', update),
     path('api/getPage/', getPage),
-    path('', getMyFolderItem),
+    path('home/', getMyFolderItem),
     path('details/', details),
+    path('login_view/', login_view),
+    path('logout_system/', logout_system),
+    path('', to_login_view),
 ]
