@@ -23,7 +23,7 @@ def login_view(request):
         login(request, user)
         return HttpResponseRedirect('/home')
     else:
-        return HttpResponseRedirect('/')
+        return render(request, 'login.html', {"msg":"用户名或者密码错误!"})
 
 
 def logout_system(request):
