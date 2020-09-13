@@ -25,7 +25,7 @@ SECRET_KEY = '-ni9cwqo*oy(oramy*x(0k6-mwshe+5e&$1)e=amc-7q6ux3&j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
