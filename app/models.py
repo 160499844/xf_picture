@@ -1,8 +1,9 @@
 from django.db import models
 import django.utils.timezone as timezone
+from django.contrib.auth.models import User
 # Create your models here.
 class FolderItem(models.Model):
-    """相册目录"""
+    """文件夹目录"""
 
     STATUS_CHOICES = (
         (u'E', u'正常'),
@@ -27,11 +28,11 @@ class FolderItem(models.Model):
         return self.file_name
 
     class Meta:
-        verbose_name = '相册目录'
+        verbose_name = '文件夹管理'
         verbose_name_plural = verbose_name
 
 class PicItem(models.Model):
-    """图片"""
+    """文件"""
     STATUS_CHOICES = (
         (u'E', u'正常'),
         (u'F', u'无效'),
@@ -53,5 +54,30 @@ class PicItem(models.Model):
         return self.file_name
 
     class Meta:
-        verbose_name = '图片媒体文件'
+        verbose_name = '媒体文件管理'
+        verbose_name_plural = verbose_name
+
+class UserToken(models.Model):
+    """用户访问权限管理"""
+    STATUS_CHOICES = (
+        (u'E', u'正常'),
+        (u'F', u'无效'),
+    )
+
+    user = models.ForeignKey(User, verbose_name='用户', related_name='userTokenFK', on_delete=models.CASCADE,
+                             null=True, blank=True)
+    folder_item = models.ForeignKey(FolderItem, verbose_name='允许访问', related_name='folderItemFK', on_delete=models.CASCADE,
+                             null=True, blank=True)
+    status = models.CharField(u'状态', choices=STATUS_CHOICES, max_length=10, blank=True, default='E')
+    create_dt = models.DateTimeField(u'添加时间',default = timezone.now,blank=True,null= True)
+    update_dt = models.DateTimeField(u'修改时间',auto_now=True,blank=True,null= True)
+
+    def __unicode__(self):
+        return self.user.username
+
+    def __str__(self):
+        return self.user.username
+
+    class Meta:
+        verbose_name = '用户访问权限管理'
         verbose_name_plural = verbose_name

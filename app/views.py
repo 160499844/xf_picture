@@ -88,7 +88,13 @@ def update(request):
 @login_required(login_url='/')
 def getMyFolderItem(request):
     """获取全部文件夹"""
-    allItems = FolderItem.objects.filter(status='E')
+    current_user = request.user
+    tokens = UserToken.objects.filter(user=current_user)
+    ids = []
+    for item in tokens:
+        ids.append(item.user.id)
+    allItems = FolderItem.objects.filter(status='E').filter(folderItemFK__user_id__in=ids)
+    print(allItems)
 
     return render(request, 'index.html', {"list":allItems})
 @login_required(login_url='/')
