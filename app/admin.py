@@ -2,6 +2,10 @@ from django.contrib import admin
 from app.models import *
 from django.utils.html import format_html
 
+admin.site.site_header = '资源管理系统'
+admin.site.site_title = '资源管理系统'
+admin.site.index_title = '资源管理系统'
+
 # Register your models here.
 class FolderItemAdmin(admin.ModelAdmin):
     def buttons(self, obj):
