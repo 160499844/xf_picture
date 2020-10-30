@@ -14,4 +14,6 @@ pip install django==2.1.7
 
 #### 使用说明
 
+启动项目：python manage.py runserver
+
 后台管理员账号：admin/admin!@#123
