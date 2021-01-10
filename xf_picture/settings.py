@@ -122,6 +122,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
+    os.path.join("D:/ffmpeg-20200824-3477feb-win64-static/movies/test2"),
 )
 #MEDIA_ROOT = os.path.join(BASE_DIR, "static")
 

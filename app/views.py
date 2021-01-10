@@ -61,6 +61,28 @@ def getPage(request):
 
 
     return HttpResponse(json.dumps(page), content_type="application/json")
+
+@login_required(login_url='/')
+def getPage(request):
+    """获取文件夹中视频列表"""
+    id = request.GET['id']
+    page = request.GET['page']
+    item = FolderItem.objects.get(id=id)
+    images = PicItem.objects.filter(main=item)
+    p = Paginator(images,24)
+    rList = []
+    page1 = p.page(page)
+    for item in page1.object_list:
+        resp = {'code': item.id, 'fileName': item.file_name}
+        rList.append(resp)
+    page = {
+        "content": rList,
+        "count": p.num_pages
+    }
+
+
+    return HttpResponse(json.dumps(page), content_type="application/json")
+
 @login_required(login_url='/')
 def update(request):
     """更新文件夹"""
@@ -85,16 +107,21 @@ def update(request):
     response = redirect('/static/html/end.html')
     return response
 
-@login_required(login_url='/')
-def getMyFolderItem(request):
+def getList(current_user):
     """获取全部文件夹"""
-    current_user = request.user
+
     tokens = UserToken.objects.filter(user=current_user)
     ids = []
     for item in tokens:
         ids.append(item.user.id)
     allItems = FolderItem.objects.filter(status='E').filter(folderItemFK__user_id__in=ids)
     print(allItems)
+    return allItems
+@login_required(login_url='/')
+def getMyFolderItem(request):
+    """获取全部文件夹"""
+    current_user = request.user
+    allItems = getList(current_user)
 
     return render(request, 'index.html', {"list":allItems})
 @login_required(login_url='/')
@@ -102,3 +129,14 @@ def details(request):
     """获取文件夹中的文件"""
     id = request.GET['id']
     return render(request, 'details.html', {"id":id})
+@login_required(login_url='/')
+def play(request):
+    id = request.GET['id']
+    item = PicItem.objects.get(id=id)
+
+    return render(request, 'play.html', {"movie":item})
+@login_required(login_url='/')
+def movies(request):
+    """获取全部文件夹"""
+    id = request.GET['id']
+    return render(request, 'movies.html', {"id":id})

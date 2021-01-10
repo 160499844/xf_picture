@@ -21,11 +21,11 @@
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/static/pic_utils/css/zoom.css">
 
 
     <script src="/static/pic_utils/js/jquery.min.js"></script>
-    <script src="/static/pic_utils/js/zoom.js"></script>
+    <script src="/static/layui/layui.js"></script>
+
 
 
     <style>
@@ -50,7 +50,7 @@
     <button type="button" class="layui-btn layui-btn-primary layui-btn-radius" onclick="folback()">TOP</button>
 </div>
 <ul class="layui-nav">
-     <li class="layui-nav-item"><a href="/home">首页</a></li>
+    <li class="layui-nav-item"><a href="/home">首页</a></li>
     <!--<li class="layui-nav-item"><a href="">最新活动</a></li>
     <li class="layui-nav-item layui-this">
         <a href="javascript:;">产品</a>
@@ -87,7 +87,7 @@
 
         <div class="layui-row layui-col-space1" style="height: 300px;" id="LAY_demo2"></div>
     </div>
-
+    <button data-method="confirmTrans" class="layui-btn">配置一个透明的询问框</button>
     <script src="/static/layui/layui.js" charset="utf-8"></script>
     <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
     <script>
@@ -121,12 +121,12 @@
                 }, 500);*/
                     var lis = [];
                     //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
-                    $.get('/api/getPage?id='+id+'&page=' + page, function (res) {
+                    $.get('/api/m/getPage?id='+id+'&page=' + page, function (res) {
                         //假设你的列表返回在data集合中
                         layui.each(res.content, function (index, item) {
                             //console.log("item",item);
                             lis.push('<div class="layui-col-md2 pic-item-div">' +
-                                '<img data-action="zoom" class="coverImg" lay-src="/group/?imgCode=' + item.code + '">' +
+                                '<img onclick="playMovie('+ item.code +')" class="coverImg" lay-src="/static/images/PIC_1.jpg">' +
                                 '</div>');
                         });
                         console.log("当前页数:",page);
@@ -139,7 +139,12 @@
 
 
         });
+        function playMovie(code) {
+            window.location.href="/play?id=" + code ;
+        }
+
     </script>
+
 </div>
 </body>
 </html>
