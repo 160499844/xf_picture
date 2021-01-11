@@ -34,7 +34,7 @@
             height:auto;
         }
         .pic-item-div{
-            height: 300px;
+
         }
 
     </style>
@@ -46,31 +46,13 @@
     </script>
 </head>
 <body>
-<div style="position: fixed;right: 200px;bottom: 150px;z-index: 999">
-    <button type="button" class="layui-btn layui-btn-primary layui-btn-radius" onclick="folback()">TOP</button>
-</div>
+{#<div style="position: fixed;right: 200px;bottom: 150px;z-index: 999">#}
+{#    <button type="button" class="layui-btn layui-btn-primary layui-btn-radius" onclick="folback()">TOP</button>#}
+{#</div>#}
 <ul class="layui-nav">
-    <li class="layui-nav-item"><a href="/home">首页</a></li>
-    <!--<li class="layui-nav-item"><a href="">最新活动</a></li>
-    <li class="layui-nav-item layui-this">
-        <a href="javascript:;">产品</a>
-        <dl class="layui-nav-child">
-            <dd><a href="">选项1</a></dd>
-            <dd><a href="">选项2</a></dd>
-            <dd><a href="">选项3</a></dd>
-        </dl>
-    </li>
-    <li class="layui-nav-item"><a href="">大数据</a></li>
-    <li class="layui-nav-item">
-        <a href="javascript:;">解决方案</a>
-        <dl class="layui-nav-child">
-            <dd><a href="">移动模块</a></dd>
-            <dd><a href="">后台模版</a></dd>
-            <dd class="layui-this"><a href="">选中项</a></dd>
-            <dd><a href="">电商平台</a></dd>
-        </dl>
-    </li>-->
-    <li class="layui-nav-item layui-col-md-offset10">
+    <li class="layui-nav-item"><a href="/home">相册</a></li>
+    <li class="layui-nav-item"><a href="/movies">视频</a></li>
+    <li class="layui-nav-item" style="float: right">
         <a href="javascript:;">{{ request.user.username }}</a>
         <dl class="layui-nav-child">
             <dd><a href="/logout_system">退出登录</a></dd>
@@ -87,7 +69,6 @@
 
         <div class="layui-row layui-col-space1" style="height: 300px;" id="LAY_demo2"></div>
     </div>
-    <button data-method="confirmTrans" class="layui-btn">配置一个透明的询问框</button>
     <script src="/static/layui/layui.js" charset="utf-8"></script>
     <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
     <script>
@@ -125,7 +106,7 @@
                         //假设你的列表返回在data集合中
                         layui.each(res.content, function (index, item) {
                             //console.log("item",item);
-                            lis.push('<div class="layui-col-md2 pic-item-div">' +
+                            lis.push('<div class="layui-col-xs12 layui-col-sm6 layui-col-md2 pic-item-div">' +
                                 '<img onclick="playMovie('+ item.code +')" class="coverImg" lay-src="/static/images/PIC_1.jpg">' +
                                 '</div>');
                         });

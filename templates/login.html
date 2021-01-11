@@ -8,7 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
-    <script src="/static/layui/layui.js" charset="utf-8"></script>
+    <script src="/static/layui/layui.js" charset="utf-8"></script>'
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/bootstrap-3.3.7-dist/css/bootstrap-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <style>
 
     </style>
@@ -19,18 +22,19 @@
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
         <legend>登录</legend>
     </fieldset>
+
     <div class="layui-row">
-        <div class="layui-col-xs4">
+        <div class="layui-col-xs10 layui-col-sm6 layui-col-md4">
             <form class="layui-form" action="/login_view/" method="post" lay-filter="example">
                 {% csrf_token %}
                 <div class="layui-form-item">
-                    <label class="layui-form-label">输入框</label>
+                    <label class="layui-form-label">账号</label>
                     <div class="layui-input-block">
                         <input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">密码框</label>
+                    <label class="layui-form-label">密码</label>
                     <div class="layui-input-block">
                         <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
                     </div>
