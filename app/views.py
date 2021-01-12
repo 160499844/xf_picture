@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from app.utils import *
 from django.contrib.auth.decorators import login_required
 from django.template.context_processors import csrf
+from app.utils import *
 
 def to_login_view(request):
     """登录页面"""
@@ -42,7 +43,7 @@ def getImages(request):
     return HttpResponse(image_data,content_type=pic.res_header) #注意旧版的资料使用mimetype,现在已经改为content_type
 
 @login_required(login_url='/')
-def getPage(request):
+def getImgPage(request):
     """获取文件夹中图片列表"""
     id = request.GET['id']
     page = request.GET['page']
@@ -52,7 +53,7 @@ def getPage(request):
     rList = []
     page1 = p.page(page)
     for item in page1.object_list:
-        resp = {'imgCode': item.id, 'imgName': item.file_name}
+        resp = {'code': item.id, 'imgName': item.file_name}
         rList.append(resp)
     page = {
         "content": rList,
@@ -63,7 +64,7 @@ def getPage(request):
     return HttpResponse(json.dumps(page), content_type="application/json")
 
 @login_required(login_url='/')
-def getPage(request):
+def getVideoPage(request):
     """获取文件夹中视频列表"""
     id = request.GET['id']
     page = request.GET['page']
@@ -73,7 +74,11 @@ def getPage(request):
     rList = []
     page1 = p.page(page)
     for item in page1.object_list:
-        resp = {'code': item.id, 'fileName': item.file_name}
+        resp = {
+            'code': item.id,
+            'fileName': item.file_name,
+            'imgPath':item.img_path
+        }
         rList.append(resp)
     page = {
         "content": rList,
@@ -90,7 +95,7 @@ def update(request):
     item = FolderItem.objects.get(id=id)
     path  = os.walk(item.resource)
     #获取全部文件
-    files = findAllFile(path)
+    files = findAllFileImg(path)
     #删除全部
     PicItem.objects.filter(main=item).delete()
     #存到表中

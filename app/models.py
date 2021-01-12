@@ -44,6 +44,7 @@ class PicItem(models.Model):
     res_header = models.CharField('响应头', max_length=100, null=True)
     resource = models.CharField(u'文件真实路径', max_length=255,blank=True)
     file_path = models.CharField(u'文件网络路径', max_length=255,blank=True,null=True)
+    img_path = models.CharField(u'视频封面', max_length=255,blank=True,null=True)
     status = models.CharField(u'状态', choices=STATUS_CHOICES, max_length=10, blank=True, default='E')
     create_dt = models.DateTimeField(u'添加时间',default = timezone.now,blank=True,null= True)
     update_dt = models.DateTimeField(u'修改时间',auto_now=True,blank=True,null= True)

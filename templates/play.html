@@ -25,6 +25,13 @@
 </ul>
 <div class="layui-container">
     <div class="layui-row">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+            <legend>
+                <a href="/home">返回</a>
+            </legend>
+        </fieldset>
+    </div>
+    <div class="layui-row">
         <div style="width: 100%;height: 80%;margin-top: 10px;">
             <div  class="prism-player" id="J_prismPlayer"></div>
         </div>
@@ -37,9 +44,9 @@
     var player = new Aliplayer({
         id: 'J_prismPlayer',
         width: '100%',
-        autoplay: true,
+        autoplay: false,
         //支持播放地址播放,此播放优先级最高
-        source : '/static/{{ movie.file_path }}',
+        source : '{{ movie.file_path }}',
         //播放方式二：点播用户推荐
         {#vid : '1e067a2831b641db90d570b6480fbc40',#}
         {#playauth : 'ddd',#}

@@ -21,7 +21,7 @@ class FolderItemAdmin(admin.ModelAdmin):
 #     list_display = ('btSeed','docItem')  # list
 #     search_fields = ('btSeed',)  # list
 class PicItemAdmin(admin.ModelAdmin):
-    list_display = ('id','main','file_name', 'type','res_header','resource','status' ,'create_dt', 'update_dt')  # list
+    list_display = ('id','main','file_name', 'type','res_header','resource','img_path','file_path','status' ,'create_dt', 'update_dt')  # list
 
 
 class UserTokenAdmin(admin.ModelAdmin):

@@ -51,7 +51,7 @@
 {#</div>#}
 <ul class="layui-nav">
     <li class="layui-nav-item"><a href="/home">相册</a></li>
-    <li class="layui-nav-item"><a href="/movies">视频</a></li>
+{#    <li class="layui-nav-item"><a href="/movies">视频</a></li>#}
     <li class="layui-nav-item" style="float: right">
         <a href="javascript:;">{{ request.user.username }}</a>
         <dl class="layui-nav-child">
@@ -107,7 +107,7 @@
                         //假设你的列表返回在data集合中
                         layui.each(res.content, function (index, item) {
                             //console.log("item",item);
-                            lis.push('<div class="layui-col-xs12 layui-col-sm6 layui-col-md2 pic-item-div">' +
+                            lis.push('<div class="layui-col-xs12 layui-col-sm6 layui-col-md4 pic-item-div">' +
                                 '<img data-action="zoom" class="coverImg" lay-src="/group/?imgCode=' + item.code + '">' +
                                 '</div>');
                         });

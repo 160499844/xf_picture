@@ -122,7 +122,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
-    os.path.join("D:/ffmpeg-20200824-3477feb-win64-static/movies/test2"),
+    os.path.join(BASE_DIR, "resource"),
+    #os.path.join("D:/web_application/nginx 1.7.11.3 Gryphon/html"),
 )
 #MEDIA_ROOT = os.path.join(BASE_DIR, "static")
 
